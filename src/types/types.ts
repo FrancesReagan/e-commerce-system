@@ -92,5 +92,6 @@ export interface FilterParams {
   category?: string;
   minPrice? : number;
   maxPrice? : number;
-  inStock? : number;
+  inStock? : boolean;
 }
+

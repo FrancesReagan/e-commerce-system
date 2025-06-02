@@ -25,6 +25,96 @@ export class Product {
   private thumbnail: string;
   private image: string[];
 
+  //getters//
+  getId(): number {
+    return this.id;
+  }
+
+  getTitle(): string {
+    return this.title;
+  }
+
+  getDescription(): string {
+    return this.description;
+  }
+
+  getCategory(): string {
+    return this.category;
+  }
+
+  getPrice(): number {
+    return this.price;
+  }
+
+  getDiscountPercentage(): number {
+    return this.discountPercentage;
+  }
+
+  getRating(): number {
+    return this.rating;
+  }
+
+  getStock(): number {
+    return this.stock;
+  }
+
+  getTags(): string[] {
+    return this.tags;
+  }
+
+  getBrand(): string {
+    return this.brand;
+  }
+
+  get Sku(): string {
+    return this.sku;
+  }
+
+  getWeight(): number {
+    return this.weight;
+  }
+
+  getDimensions(): Dimensions {
+    return this.dimensions;
+  }
+
+  getWarrantyInformation(): string {
+    return this.warrantyInformation;
+  }
+
+  getShippingInformation(): string {
+    return this.shippingInformation;
+  }
+
+  getAvailabilityStatus(): string {
+    return this.availabilityStatus;
+  }
+
+  getReviews(): Review{
+    return this.reviews;
+  }
+
+  getReturnPolicy() {
+    return this.returnPolicy;
+  }
+
+  getMinimumOrderQuantity(): number {
+    return this.minimumOrderQuantity;
+  }
+  getMeta(): ProductMeta {
+    return this.meta;
+  }
+
+  getThumbnail(): string {
+    return this.thumbnail;
+  }
+
+  getImages:():string[] {
+    return this.images;
+  }
+
+  
+
   constructor(data: ProductData) {
     this.id = data.id;
     this.title = data.title;

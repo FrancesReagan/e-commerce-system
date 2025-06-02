@@ -23,7 +23,7 @@ export class Product {
   private minimumOrderQuantity: number;
   private meta: ProductMeta;
   private thumbnail: string;
-  private image: string[];
+  private images: string[];
 
   //getters//
   getId(): number {
@@ -66,7 +66,7 @@ export class Product {
     return this.brand;
   }
 
-  get Sku(): string {
+  getSku(): string {
     return this.sku;
   }
 
@@ -90,7 +90,7 @@ export class Product {
     return this.availabilityStatus;
   }
 
-  getReviews(): Review{
+  getReviews(): Review[] {
     return this.reviews;
   }
 
@@ -109,11 +109,9 @@ export class Product {
     return this.thumbnail;
   }
 
-  getImages:():string[] {
+  getImages():string[] {
     return this.images;
   }
-
-  
 
   constructor(data: ProductData) {
     this.id = data.id;

@@ -1,7 +1,7 @@
 
 //src/types/types.ts//
 //Product-related interfaces//
-export infterface Dimensions {
+export interface Dimensions {
   width: number;
   height: number;
   depth: number;
@@ -10,7 +10,7 @@ export infterface Dimensions {
 export interface Review {
   rating: number;
   comment: string;
-  date: string:
+  date: string;
   reviewerName: string;
   reviewerEmail: string;
 }
@@ -53,4 +53,44 @@ export interface ProductsResponse {
   total: number;
   skip: number;
   limit: number;
+}
+
+export interface CategoriesResponse {
+  categories: string[];
+}
+
+//error types//
+export interface ApiErrorResponse {
+  message: string;
+  statusCode: number;
+}
+
+//price calculation types//
+export interface PriceBreakdown {
+  subtotal: number;
+  taxRate: number;
+  taxAmount: number;
+  total: number;
+}
+
+//Review summary type//
+export interface ReviewSummary {
+  positive: number;
+  neutral: number;
+  negative: number;
+}
+
+//Search parameters//
+export interface SearchParams {
+  query: string;
+  limit?: number;
+  skip?: number;
+}
+
+//filter parameters//
+export interface FilterParams {
+  category?: string;
+  minPrice? : number;
+  maxPrice? : number;
+  inStock? : number;
 }

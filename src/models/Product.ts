@@ -187,5 +187,41 @@ displayDetails(): string {
     Updated: ${new Date(this.meta.updatedAt).toLocaleDateString()}
     `;
   }
-}
+
+// calculate price with discount//
+
+getPriceWIthDiscount(): number {
+      const discountAmount =(this.price * this.discountPercentage) / 100;
+      return this.price - discountAmount;
+    }
+
+//additional utility methods//
+//check if product is in stock//
+isinStock(): boolean {
+  return this.stock > 0;
+    }
+
+//check if product is low in stock//
+isLowStock(): boolean {
+       return this.availabilityStatus.toLowerCase().includes('low');
+    }
+
+//get average review rating//
+getAverageReviewRating(): number {
+      if(this.reviews.length ===0)return 0;
+      const sum = this.reviews.reduce((acc.review) => acc + review.rating, 0);
+      return sum / this.reviews.length;
+    }
+
+//get total volume of product//
+getVolume(): number {
+return this.dimensions.width * this.dimensions.height * this.dimensions.depth;
+    }
+
+//check if product has a specific tag//
+hasTag(tag: string): boolean {
+    return this.tags.some(t=>t.toLowerCase()===tag.toLowerCase());
+    }
+
+    g
 

@@ -1,5 +1,8 @@
 //src/models/Product.ts/
+import { kStringMaxLength } from 'buffer';
 import { ProductData, Dimensions, Review, ProductMeta, ReviewSummary } from '../types/types';
+import { chmod } from 'fs';
+import { getUnpackedSettings } from 'http2';
 
 export class Product {
   private id: number;
@@ -137,7 +140,52 @@ export class Product {
     this.thumbnail = data.thumbnail;
     this.images = data.images;
   }
-
 }
+//display product details//
+displayDetails(): string {
+  displayDetails(): string {
+    const priceWithDiscount = this.getPriceWithDiscount();
+    const savings = this.price - priceWithDiscount;
 
+    return `
+    Product Details:
+    ==================
+    ID:${this.id}
+    SKU:${this.sku}
+    Title:${this.title}
+    Brand: ${this.brand}
+    Category: ${this.category}
+    Tags: ${this.tags.join(',')}
+    Description: ${this.description}
+
+    Pricing Information:
+    --------------
+    Original Price: ${this.price.toFixed(2)}
+    Discount: ${this.discountPercentage}%
+    Price after discount: ${priceWithDiscount.toFixed(2)}
+    You save: ${savings.toFixed(2)
+
+    Product Specifications:
+    ----------------------
+    Weight: ${this.weight} kg 
+    Dimensions: ${this.dimensions.width} x ${this.dimensions.height} x ${this.dimensions.depth} cm 
+    Rating: ${this.rating}/5 (${this.reviews.length} reviews)
+    Stock: ${this.stock} units 
+    Availability: ${this.availabilityStatus}
+    Minimum Order: ${this.minimumOrderQuantity} units 
+
+    Policies:
+    -------
+    Warranty: ${this.warrantyInformation}
+    Shipping: ${this.shippingInformation}
+    Returns: ${this.returnPolicy}
+
+    Metadata:
+    -------
+    Barcode: ${this.meta.barcode}
+    Created: ${new Date(this.meta.createdAt).toLocaleDateString()}
+    Updated: ${new Date(this.meta.updatedAt).toLocaleDateString()}
+    `;
+  }
+}
 

@@ -98,6 +98,8 @@ static async getCategories(): Promise<Category[]> {
     throw error;
   }
   }
+}
+
 
 
 

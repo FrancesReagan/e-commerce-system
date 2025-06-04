@@ -49,13 +49,57 @@ return new Product(productData);
         const response = await fetch(`${API_BASE_URL}/products/search?q=${encodeURIComponent(query)}`);
         if(!Response.ok){
           throw new ApiError(
-            `Failed to search products:${Response.statusText}`,
-            Response.status
+            `Failed to search products:${response.statusText}`,
+            response.status
           );
         }
-
-
-
-        
+const data: ProductsResponse = await response.json();
+return data.products.map(productData=> new Product(productData));
+      } catch (error){
+        handleError(error);
+        throw error;
+      } 
       }
+//get products by category//
+static async getProductsByCategory(category:string): Promise<Product[]> {
+  try {
+    const response = await
+    fetch(`$(API_BASE_URL}/products/category/${encodeURIComponent(category)}`);
+
+    if(!Response.ok) {
+      throw new ApiError(
+        `Failed to fetch products for category ${category}: ${Response.statusText}`,
+        response?.status
+      );
     }
+    const data: ProductsResponse = await response.json();
+    return data.products.map((productData => new Product(productData));
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+  }
+//get all categories//
+static async getCategories(): Promise<Category[]> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/products/categories`);
+
+    if(!response.ok) {
+      throw new ApiError(
+        `Failed to fetch categories: ${Response.statusText}`,
+        response.status
+      );
+    }
+
+    const categories: string[] = await response.json();
+    return categories;
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+  }
+
+
+
+      
+    

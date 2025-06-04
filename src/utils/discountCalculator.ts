@@ -34,6 +34,17 @@ export function formatPrice(price: number, currencySymbol: string = "$": string 
   return `${currencySymbol}${price.toFixed(2)}`;
 }
 
+// calculate savings percentage compared to original price//
+// @parameter originalPrice - Original price//
+// @parameter finalPrice - final price after discount//
+// @returns Savings percentage//
 
+export function calculateSavingsPercentage(originalPrice:number, finalPrice:number):number {
+  number {
+    if (originalPrice < 0){
+      return 0;
+    }
 
-)
+  const savings = originalPrice - finalPrice;
+  return(savings / originalPrice) * 100;
+  }

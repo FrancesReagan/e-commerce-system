@@ -187,9 +187,7 @@ displayDetails(): string {
     Updated: ${new Date(this.meta.updatedAt).toLocaleDateString()}
     `;
   }
-
 // calculate price with discount//
-
 getPriceWIthDiscount(): number {
       const discountAmount =(this.price * this.discountPercentage) / 100;
       return this.price - discountAmount;
@@ -223,5 +221,21 @@ hasTag(tag: string): boolean {
     return this.tags.some(t=>t.toLowerCase()===tag.toLowerCase());
     }
 
-    g
+    //get formatted dimensions string//
+    getFormattedDimensions(): string {
+    return `${this.dimensions.width}Wx${this.dimensions.height}Hx
+    ${this.dimensions.depth}D cm`;
+    }
 
+    //get review summary//
+    getReviewSummary():ReviewSummary{
+      const summary: ReviewSummary={positive: 0, neutral: 0, negative:0};
+      }
+      this.reviews.forEach(review => {
+      if(review.rating>=4)summary.positive++;
+      else if(review.rating>=3)summary.neutral++;
+      else summary.negative++;
+    });
+    return summary;
+    }
+    }

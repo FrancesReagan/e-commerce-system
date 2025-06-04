@@ -20,3 +20,20 @@ export function calculateDiscount(price: number, discountPercentage: number): {
 // @parameter discountPercentage - discount percentage to apply//
 // @returns the final price after discount//
 
+export function calculateFinalPrice(price: number, discountPercentage:number):number {
+  const discountAmount = calculateDiscount(price, discountPercentage);
+  return price - discountAmount;
+}
+
+// format price for display//
+// @parameter price - price to format//
+// @parametr currencySymbol - Currency symbol  (default:$)
+// @returns formatted price string//
+
+export function formatPrice(price: number, currencySymbol: string = "$": string {
+  return `${currencySymbol}${price.toFixed(2)}`;
+}
+
+
+
+)

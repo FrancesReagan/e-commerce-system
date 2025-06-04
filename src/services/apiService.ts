@@ -1,5 +1,5 @@
 import {Product} from "../models/Product";
-import {ProductData,ProductResponse} from "../types/types";
+import {ProductData,ProductResponse, ProductsResponse} from "../types/types";
 import {handleError, ApiError} from "../utils/errorHandler";
 
 const API_BASE_URL = "https://dummyjson.com";
@@ -17,5 +17,45 @@ export class ApiService {
         );
       }
     }
+    const data: ProductsResponse = await response.json();
+    return data.products.map(productData => new Product(productData));
+  }catch(error){
+    handleError(error);
+    throw error;
   }
-}
+  }
+
+  //fetch single product by ID//
+  static async getProductById(id: number): Promise<Product> {
+    try {
+      const response = await fetch(`${API_BASE_URL}/products/${id}`);
+      if(!Response.ok) {
+        throw new ApiError(
+          `Failed to fetch product with ID ${id}: ${response.statusText}`,
+          response.status
+        );
+      }
+const productData: ProductData = await response.json();
+return new Product(productData);
+    }catch(error){
+      handleError(error);
+      throw error;
+    }
+    }
+  
+    //search products by query//
+    static async searchProducts(query: string): Promise<Product[]> {
+      try{
+        const response = await fetch(`${API_BASE_URL}/products/search?q=${encodeURIComponent(query)}`);
+        if(!Response.ok){
+          throw new ApiError(
+            `Failed to search products:${Response.statusText}`,
+            Response.status
+          );
+        }
+
+
+
+        
+      }
+    }

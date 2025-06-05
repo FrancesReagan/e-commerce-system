@@ -1,4 +1,5 @@
 import { get } from "http";
+import { PriceBreakdown } from "../types/types";
 
 Import {PriceBreakdown} from "src/models/types/types";
 // 4.75% default tax rate//
@@ -40,4 +41,22 @@ export function getTaxRate(category:string):number{
 export function calculatePriceWithTax(price:number, category:string):number{
   const taxAmount = calculateTax(price, category);
   return price + taxAmount;
+}
+
+// get a breakdown of price,tax, and total//
+//@param price -price before tex//
+//@param category - product category//
+//@returns object containing price breakdown//
+
+export function getPriceBreakdown(price:number, category:string):PriceBreakdown {
+  const taxRate = getTaxRate(category);
+  const taxAmount = calculateTax(price, category);
+  const total = price + taxAmount;
+
+return {
+  subtotal: price,
+  taxRate,
+  taxAmount,
+  total
+};
 }

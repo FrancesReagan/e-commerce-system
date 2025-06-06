@@ -74,4 +74,22 @@ async function fetchProductById(id) {
     throw error;
   }
 }
-
+// search products using async/await//
+async function searchProducts(query){
+  try{
+    showLoading(true);
+    hideError();
+    const response = await fetch(`${API_BASE_URL}/products/search?q=${encodeURIComponent(query)}`);
+    if(!response.ok) {
+      throw new Error("Search failed");
+    }
+    const data = await response.json();
+    return data.products;
+  } catch(error) {
+    console.error("Search error:",error);
+    showError("Search failed.Please try again.");
+    return [];
+  }finally {
+    showLoading(false);
+  }
+}

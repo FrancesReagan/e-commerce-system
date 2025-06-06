@@ -129,4 +129,28 @@ async function fetchCategories() {
     return [];
   }
 }
+// display products in grid//
+function displayProducts(products){
+  if(!products || !products.length === 0) {
+    productsGrid.innerHTML = '<p class="no-products">No products found.</p>';
+    return;
+  }
+  productsGrid.innerHTML = products.map(product => createProductCard(product)).join("");
+}
 
+// create product card HTML//
+function createProductCard(product){
+  const discountedPrice = calculateDiscountedPrice(product.price,product.discountPercentage);
+  const taxAmount = calculateTax(discountedPrice, product.category);
+  const finalPrice = discountedPrice + taxAmount;
+  return `
+   <div class="product-card" data-product-id="${product.id}">
+    <img src="${product.thumbnail} alt="${product.title}" class="product-image">
+    <div class="product-info">
+    <h3 class="product-title">${product.title}</h3>
+    <p class="product-brand">${product.brand}</p>
+    <p class="product-category">${product.category}</p>
+    <div class="product-rating">
+    <span class="rating-value">${product.rating}</span>
+   </div>`
+}

@@ -67,4 +67,58 @@ class ECommerceApp {
       throw.error;
     }
   }
-  
+  // demonstrate search functinality//
+  private async demonstrateSearch(): Promise<void>{
+    console.log('Searching for "phone"...\n');
+
+    try {
+      const searchResults = await this.ApiService.searchProducts("phone");
+
+      if(searchResults.length === 0){
+        console.log("No products found.");
+      } else {
+        console.log(`Found ${searchResults.length}products:\n`);
+
+        searchResults.forEach(product => {
+          console.log(`-${product.getTitle()}(${product.getBrand()})- ${formatPrice(product.getPrice())}`);
+      });
+    }
+
+    console.log("\n" + "=".repeat(50) + "\n");
+  } catch (error) {
+    throw error;
+  }    
+  // demonstrate category filtering//
+  private async demonstrateCategoryFilter(): Promise<void>{
+    console.log("Fetching products by category...\n");
+
+    try{
+      // first get all categories//
+      const categories = await this.ApiService.searchCategories();
+      console.log(`Available categories: ${categories.slice(0,5).join(",")}...\n`);
+
+      // fetch products from a specific category//
+      const category = "smartphones";
+      console.log(`Fetching products from "${category}" category:\n`);
+
+      const categoryProducts = await this.ApiService.getProductsByCategory(category);
+
+      categoryProducts.slice(0,3).forEach(product=>{
+        console.log(`-${product.getTile()}-${formatPrice(product.getPrice())}`);
+      });
+      console.log("\n" + "=".repeat(50)+ "\n");
+    } catch (error) {
+      throw error; 
+    }
+    }
+
+    // demonstrate tax calculations//
+    private async demonastrateTaxCalculations(): Promise<void>{
+      console.log("Demonstrating tax calculations...\n");
+
+      if(this.products.length === 0){
+        console.log("No products available for tax demonstration.");
+        return;
+      }
+    }
+  }

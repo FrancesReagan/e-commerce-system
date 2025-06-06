@@ -223,3 +223,24 @@ select {
   animation: spin 1s linear infinite;
   margin: 0 auto;
 }
+
+@keyframes spin {
+  0%{transform:rotate(0deg);}
+  100%{transform:rotate(360deg);}
+}
+
+#error-message {
+  background-color: #e74c3c;
+  color:white;
+  padding:15px;
+  border-radius:4px;
+  margin-bottom:20px;
+  display:none;
+}
+
+.no-products {
+  text-align: center;
+  padding:40px;
+  color:#7f8c8d;
+  font-size:1.2rem;
+}

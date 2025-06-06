@@ -59,4 +59,19 @@ async function fetchProducts(limit=30) {
   }
 }
 
+//fetch a single product by ID using async/await//
+async function fetchProductById(id) {
+  try{
+    const response = await fetch(`${API_BASE_URL}/products/${id}`);
+    if(!response.ok) {
+      throw new Error(`Product not found with ID:${id}`);
+    }
+
+    const product = await response.json();
+    return product;
+  } catch(error) {
+    console.error("Error fetching product:", error);
+    throw error;
+  }
+}
 

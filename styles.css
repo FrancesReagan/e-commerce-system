@@ -158,3 +158,31 @@ select {
   color:#95a5a6;
   font-size:0.9rem;
 }
+
+.discount-badge {
+  background-color:#e74c3c;
+  color:white;
+  padding:2px 8px;
+  border-radius:3px;
+  font-size:0.8rem;
+  display:inline-block;
+  margin:5px 0;
+}
+
+.discounted-price {
+  font-size:1.3rem;
+  font-weight:bold;
+  color:#27ae60;
+}
+
+.tax-info {
+  font-size:0.9rem;
+  color:#7f8c8d;
+}
+
+.final-price {
+  font-size:1.1rem;
+  font-weight:bold;
+  color:#2c3e50;
+  margin-top:5px;
+}

@@ -203,3 +203,23 @@ select {
   cursor:pointer;
   transition:background-color 0.3s;
 }
+
+.view-details-btn:hover {
+  background-color:#2980b9;
+}
+
+#loading{
+  text-align: center;
+  padding:20px;
+  display:none;
+}
+
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top:3px solid #3498db;
+  border-radius:50%;
+  width:40px;
+  height:40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}

@@ -115,3 +115,24 @@ function handleUnknownError(error: unknown):void {
   console.error("[CRITICAL] Unknown error type:", error);
   console.log("An unexpected error occurred. Please try again");
 }
+// create a user-friendly error message//
+// @param error - error to create message for//
+// @returns user-friendly error message//
+
+export function getUserFriendlyMessage(error:unknown):string {
+  if (error instanceof ApiError) {
+    if (error.statusCode === 404) {
+      return "The requested resource was not found.";
+    } else if (error.statusCode >= 500){
+      return "Server is experiencing issues. Please try again later.";
+
+    }
+    return "An error occurred while communicating with the server.";
+  } else if (error instanceof ValidationError){
+    return `Invalid input: ${error.message}`;
+  } else if (error instanceof NetworkError){
+    return "Network connection error. Please check your internet connection.";
+  } else if (error instanceof Error) {
+    return error.message;
+  }
+}

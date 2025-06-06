@@ -93,3 +93,24 @@ async function searchProducts(query){
     showLoading(false);
   }
 }
+
+// fetch products by category using async/await//
+async function fetchProductsByCategory(category){
+  try {
+    showLoading(true);
+    hideError();
+    const response = await fetch(`${API_BASE_URL}/products/category/${encodeURIComponent(category)}`);
+    if(!response.ok) {
+      throw new Error(`Failed to fetch products for category:${category}`);
+    }
+    const data = await response.json();
+    return data.products;
+
+  }catch (error){
+    console.error("Category fetch error:",error);
+    showError("Failed to load category products");
+    return[];
+  }finally{
+    showLoading(false);
+  }
+}

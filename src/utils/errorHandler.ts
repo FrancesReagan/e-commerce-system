@@ -85,4 +85,11 @@ function handleApiError(error: ApiError):void {
     console.log("Server error. Please try again later.");
   }
 }
+// handle validation errors//
+// @param error - validation error to handle//
 
+function handleValidationError(error: ValidationError): void {
+  logError(error, ErrorSeverity.LOW);
+  console.log(`Validation failed${error.field ? ` for field '${error.field}'` : ''}: ${error.message}`);
+
+}

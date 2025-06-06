@@ -135,4 +135,6 @@ export function getUserFriendlyMessage(error:unknown):string {
   } else if (error instanceof Error) {
     return error.message;
   }
+
+  return "An unexpected error occurred. Please try again.";
 }

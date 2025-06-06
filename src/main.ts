@@ -120,5 +120,22 @@ class ECommerceApp {
         console.log("No products available for tax demonstration.");
         return;
       }
-    }
-  }
+
+// take first few products for demonstration//
+const demoProducts = this.products.slice(0,3);
+
+demoProducts.forEach(product => {
+  const priceAfterDiscount = product.priceAfterDiscount();
+  const taxAmount = calculateTax(priceAfterDiscount, product.getCategory());
+  const breakdown = getPriceBreakdown(priceAfterDiscount, product.getCategory());
+
+  console.log(`Product:${product.getTitle()}`);
+  console.log(`Category:${product.getCategory()}`);
+  console.log(`Originial Price:${formatPrice(product.getPrice())}`);
+  console.log(`Price after discount:${formatPrice(priceAfterDiscount)}`);
+  console.log(`Tax Rate:${breakdown.taxRate}%`);
+  console.log(`Tax Amount:${formatPrice(taxAmount)}`);
+  console.log.apply(`Final Price(with tax): ${formatPrice(breakdown.total)}`);
+  console.log("-".repeat(30));
+});
+

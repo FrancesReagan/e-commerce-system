@@ -1,4 +1,4 @@
-
+d
 // app.js -javascript for the e-commerce UI//
 
 const { displayPartsToString } = require("typescript");
@@ -144,13 +144,25 @@ function createProductCard(product){
   const taxAmount = calculateTax(discountedPrice, product.category);
   const finalPrice = discountedPrice + taxAmount;
   return `
-   <div class="product-card" data-product-id="${product.id}">
+  <div class="product-card" data-product-id="${product.id}">
     <img src="${product.thumbnail} alt="${product.title}" class="product-image">
     <div class="product-info">
     <h3 class="product-title">${product.title}</h3>
     <p class="product-brand">${product.brand}</p>
     <p class="product-category">${product.category}</p>
-    <div class="product-rating">
-    <span class="rating-value">${product.rating}</span>
-   </div>`
+     <div class="product-rating">
+     <span class="rating-value">${product.rating}</span>
+    </div>
+  <div class="product-pricing">
+    <p class="original-price">$${product.price.toFixed(2)}</p>
+    <p class="discount-badge">${product.discountPercentage}% OFF,</p>
+    <p class="discounted-price">$${discountedPrice.toFixed(2)}</p>
+    <p class="tax-info">Tax:$${taxAmount.toFixed(2)}</p>
+    <p class="final-price">Total:$${finalPrice.toFixed(2)}</p>
+   </div>
+   <p class="product-stock">Stock:${product.stock} units</p>
+   <button class="view-details-btn" onclick="viewProductDetails(${product.id})">View Details</button>
+   </div>
+  </div>
+    `;
 }

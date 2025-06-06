@@ -139,3 +139,33 @@ demoProducts.forEach(product => {
   console.log("-".repeat(30));
 });
 
+console.log("\n" + "=".repeat(50) + "\n");
+    }
+
+    // demonstrate error handling//
+    private async demonstrateErrorHandling(): Promise<void>{
+      console.log("Demonstrating error handling...\n");
+      // test API error - invalid product ID//
+      console.log("1.Testing invalid product ID:");
+
+      try {
+        await ApiService.getProductById(999999);
+      } catch (error) {
+        console.log("Error caught and handled gracefully.\n");
+      }
+
+    // test validation error//
+    console.log("2. Testing validation error:");
+
+    try {
+      calculateDiscount(-100,20);
+    } catch (error) {
+      if (error instanceof Error){
+        const validationError = new ValidationError(error.message, "price");
+        handleError(validationError);
+      }
+    }
+    
+    console.log("\n Application demonstration complete");
+  }
+  

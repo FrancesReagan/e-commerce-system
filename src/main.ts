@@ -49,3 +49,22 @@ class ECommerceApp {
     }
   }
 
+  // demonstrate fetching a single product//
+  private async demonstrateSingleProductFetch(): Promise<void>{
+    console.log("Fetching single product (ID:1)...\n");
+
+    try {
+      const product = await this.ApiService.getProductById(1);
+      console.log(product.displayDestails());
+
+      // show discount calculation//
+      const discountAmount = calculateDiscount(product.getPrice(),
+    product.getDiscountPercentage());
+
+    console.log(`Discount amount: ${formatPrice(discountAmount)}`);
+    console.log("\n" + "=".repeat(50) + "\n");
+    } catch (error) {
+      throw.error;
+    }
+  }
+  

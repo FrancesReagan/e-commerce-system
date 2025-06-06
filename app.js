@@ -1,5 +1,8 @@
 
 // app.js -javascript for the e-commerce UI//
+
+const { displayPartsToString } = require("typescript");
+
 //this file uses async/await for all asynchronous operations//
 const API_BASE_URL = "https://dummyjson.com";
 // state management//
@@ -18,5 +21,25 @@ const errorDiv= document.getElementById("error-message");
 async function init() {
   try {
     showloading(true);
-    
-}
+    // load categories and products simultaneously//
+    const[categories, products] = await Promise.all([
+      fetchCategories(),
+      fetchProducts(),
+    ]);
+
+    allCategories = categories;
+    currentProducts = products;
+
+    populateCategoryDropdown(categories);
+    displayProducts(products);
+
+    // set up event listeners//
+    setupEventListeners();
+  } catch (error) {
+    showError("Failed to initialize the application. Please refresh the page.");
+    console.error("Initialization error:", error);
+  }finally{
+    showloading(false);
+  }
+     }
+

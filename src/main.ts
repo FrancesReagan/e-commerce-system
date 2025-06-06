@@ -168,4 +168,16 @@ console.log("\n" + "=".repeat(50) + "\n");
     
     console.log("\n Application demonstration complete");
   }
-  
+}
+
+// main execution//
+async function main(): Promise<void> {
+  const app = new ECommerceApp();
+  await app.init();
+}
+
+// run the application//
+main().catch(error => {
+  console.error("Fatal.error:", error);
+  process.exit(1);
+});

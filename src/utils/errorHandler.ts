@@ -93,3 +93,25 @@ function handleValidationError(error: ValidationError): void {
   console.log(`Validation failed${error.field ? ` for field '${error.field}'` : ''}: ${error.message}`);
 
 }
+
+// handle network errors//
+// @param error - network error to handle//
+function handleNetworkError(error: NetworkError):void {
+  logError(error, ErrorSeverity.HIGH);
+  console.log("Network error occurred. Please check your internet connection.");
+
+}
+
+// handle generic errors//
+// @param error - generic error to handle//
+function handleGenericError(error: Error):void {
+  logError(error,ErrorSeverity.MEDIUM);
+  console.log("An unexpected error occurred:", error.message);
+} 
+
+// handle unknown errors//
+// @param error - unknown error to handle//
+function handleUnknownError(error: unknown):void {
+  console.error("[CRITICAL] Unknown error type:", error);
+  console.log("An unexpected error occurred. Please try again");
+}

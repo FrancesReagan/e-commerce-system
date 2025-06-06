@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./styles.css" rel="stylesheet">
+    <title>E-Commerce System</title>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1> E-Commerce System </h1>
+    </div>
+  </header>
+  <main class="container">
+    <div id="error-message"></div>
+<div class="controls">
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Search products...">
+    <button id="search-button">Search</button>
+  </div>
+  <div class="category-filter">
+    <label for="category-select">Filter by Category:</label>
+    <select id="category-select">
+      <option value="">All Categories</option>
+    </select>
+  </div>
+</div>
+
+<div id="loading">
+  <div class="spinner"></div>
+  <p>Loading products...</p>
+</div>
+<div id="products-grid"></div>
+  </main>
+<script src="app.js"></script>
+</body>
+</html>

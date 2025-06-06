@@ -47,4 +47,42 @@ export function logError(error: Error, severity: ErrorSeverity = ErrorSeverity.M
     message:error.message,
     stack:error.stack,
   };
+
+console.error(`[${severity}]${timestamp}-${error.name}:${error.message}`);
+if (error.stack && severity === ErrorSeverity.HIGH || severity === ErrorSeverity.CRITICAL) {
+  console.error("Stack trace:", error.stack);
 }
+}
+
+// Handle different typesof errors appropriately//
+// @param error - error to handle//
+
+export function handleError(error: unknown):void {
+  if (error instanceof ApiError) {
+    handleApiError(error);
+  } else if (error instanceof ValidationError){
+    handleValidationError(error);
+  } else if (error instanceof NetworkError){
+    handleNetworkError(error);
+  } else if (error instanceof Error) {
+    handleGenericError(error);
+  } else {
+    handleGenericError(error);
+  }
+}
+
+// handle APPI errors//
+// @param error - API error to handle//
+
+function handleApiError(error: ApiError):void {
+  const severity = error.statusCode >= 500 ? ErrorSeverity.HIGH : ErrorSeverity.MEDIUM;
+  logError(error, severity);
+
+  if (error.statusCode === 404) {
+    console.log("Resource not found. Please check the ID or URL");
+
+  } else if (error.statusCode >=500){
+    console.log("Server error. Please try again later.");
+  }
+}
+

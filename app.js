@@ -14,3 +14,9 @@ const categorySelect = document.getElementById("category-select");
 const loadingDiv = document.getElementById("loading");
 const errorDiv= document.getElementById("error-message");
 
+// initialize the application//
+async function init() {
+  try {
+    showloading(true);
+    
+}

@@ -113,7 +113,7 @@ class ECommerceApp {
     }
 
     // demonstrate tax calculations//
-    private async demonastrateTaxCalculations(): Promise<void>{
+    private async demonstrateTaxCalculations(): Promise<void>{
       console.log("Demonstrating tax calculations...\n");
 
       if(this.products.length === 0){

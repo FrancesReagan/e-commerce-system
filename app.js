@@ -244,6 +244,27 @@ categorySelect.addEventListener("change", async(e)=>{
     displayProducts(currentProducts);
   }
 });
-
-
+// clear search//
+searchInput.addEventListener("input", async(e)=>{
+  if(e.target.value === ""){
+    displayProducts(currentProducts);
+  }
+});
 }
+
+// UI helper functions//
+function showLoading(show){
+  loadingDiv.style.display = show ? "block" : "none";
+}
+
+function showError(message){
+  errorDiv.textContent = message;
+  errorDiv.style.display = "block";
+}
+
+function hideError(){
+  errorDiv.style.display = "none";
+}
+
+// initialize the app when DOM is loaded//
+document.addEventListener("DOMContentLoaded", init);

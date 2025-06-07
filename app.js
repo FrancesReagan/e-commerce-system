@@ -184,5 +184,42 @@ async function viewProductDetails(productID){
       Rating:${product.rating}/5
       Stock:${product.stock} units
       `);
+  }catch(error){
+    showError("Failed to load product details.");
+  }finally{
+    showLoading(false);
   }
+}
+
+// calculate discounted price//
+function calculateDiscountedPrice(price,discountPercentage){
+  return price - (price*discountPercentage/100);
+}
+
+// calculate tax//
+function calculateTax(price,category){
+  const taxRate = category.toLowerCase() === "groceries" ?0.03:0.0475;
+  return price * taxRate;
+}
+
+// populate category dropdown//
+function populateCategoryDropdown(categories){
+  const options = ['<option value="">All Categories</option>'];
+
+ categories.forEach(category => {
+        options.push(`<option value="${category}">${category}</option>`);
+    });
+categorySelect.innerHTML = options.join("");
+}
+
+// set up event listeners//
+function setupEventListeners(){
+  // search functionality//
+  searchButton.addEventListener("click", async()=>{
+    const query = searchInput.ariaValueMax.trim();
+    if(query){
+      const results = await searchProducts(query);
+      displayProducts(results);
+    }
+  });
 }

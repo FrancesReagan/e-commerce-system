@@ -1,5 +1,5 @@
 import {Product} from "../models/Product";
-import {ProductData,ProductResponse, ProductsResponse} from "../types/types";
+import {ProductData, ProductsResponse} from "../types/types";
 import {handleError, ApiError} from "../utils/errorHandler";
 
 const API_BASE_URL = "https://dummyjson.com";
@@ -16,7 +16,7 @@ export class ApiService {
 
         );
       }
-    }
+  
     const data: ProductsResponse = await response.json();
     return data.products.map(productData => new Product(productData));
   }catch(error){
@@ -29,7 +29,7 @@ export class ApiService {
   static async getProductById(id: number): Promise<Product> {
     try {
       const response = await fetch(`${API_BASE_URL}/products/${id}`);
-      if(!Response.ok) {
+      if(!response.ok) {
         throw new ApiError(
           `Failed to fetch product with ID ${id}: ${response.statusText}`,
           response.status
@@ -47,7 +47,7 @@ return new Product(productData);
     static async searchProducts(query: string): Promise<Product[]> {
       try{
         const response = await fetch(`${API_BASE_URL}/products/search?q=${encodeURIComponent(query)}`);
-        if(!Response.ok){
+        if(!response.ok){
           throw new ApiError(
             `Failed to search products:${response.statusText}`,
             response.status
@@ -64,29 +64,29 @@ return data.products.map(productData=> new Product(productData));
 static async getProductsByCategory(category:string): Promise<Product[]> {
   try {
     const response = await
-    fetch(`$(API_BASE_URL}/products/category/${encodeURIComponent(category)}`);
+    fetch(`${API_BASE_URL}/products/category/${encodeURIComponent(category)}`);
 
-    if(!Response.ok) {
+    if(!response.ok) {
       throw new ApiError(
-        `Failed to fetch products for category ${category}: ${Response.statusText}`,
-        response?.status
+        `Failed to fetch products for category ${category}: ${response.statusText}`,
+        response.status
       );
     }
     const data: ProductsResponse = await response.json();
-    return data.products.map((productData => new Product(productData));
+    return data.products.map(productData => new Product(productData));
   } catch (error) {
     handleError(error);
     throw error;
   }
   }
 //get all categories//
-static async getCategories(): Promise<Category[]> {
+static async getCategories(): Promise<string[]> {
   try {
     const response = await fetch(`${API_BASE_URL}/products/categories`);
 
     if(!response.ok) {
       throw new ApiError(
-        `Failed to fetch categories: ${Response.statusText}`,
+        `Failed to fetch categories: ${response.statusText}`,
         response.status
       );
     }

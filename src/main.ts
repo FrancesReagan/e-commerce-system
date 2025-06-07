@@ -18,7 +18,7 @@ class ECommerceApp {
       await this.fetchAndDisplayProducts();
 
       // demonstrate single product fetch//
-      await.this.demonstrateSingleProductFetch();
+      await this.demonstrateSingleProductFetch();
       // demonstrate search functionality//
       await this.demonstrateSearch();
       // demonstrate category filtering//
@@ -36,7 +36,7 @@ class ECommerceApp {
     console.log("Fetching all products...\n");
     try{
       // fetch 10 products for demo//
-      this.products = await this.ApiService.getAllProducts(10);
+      this.products = await ApiService.getAllProducts(10);
       console.log(`Found ${this.products.length} products:\n`);
 
       this.products.forEach((product, index) => {
@@ -54,8 +54,8 @@ class ECommerceApp {
     console.log("Fetching single product (ID:1)...\n");
 
     try {
-      const product = await this.ApiService.getProductById(1);
-      console.log(product.displayDestails());
+      const product = await ApiService.getProductById(1);
+      console.log(product.displayDetails());
 
       // show discount calculation//
       const discountAmount = calculateDiscount(product.getPrice(),
@@ -64,7 +64,7 @@ class ECommerceApp {
     console.log(`Discount amount: ${formatPrice(discountAmount)}`);
     console.log("\n" + "=".repeat(50) + "\n");
     } catch (error) {
-      throw.error;
+      throw error;
     }
   }
   // demonstrate search functinality//
@@ -72,45 +72,47 @@ class ECommerceApp {
     console.log('Searching for "phone"...\n');
 
     try {
-      const searchResults = await this.ApiService.searchProducts("phone");
+      const searchResults = await ApiService.searchProducts("phone");
 
       if(searchResults.length === 0){
         console.log("No products found.");
       } else {
-        console.log(`Found ${searchResults.length}products:\n`);
+       console.log(`Found ${searchResults.length} products:\n`);
 
         searchResults.forEach(product => {
           console.log(`-${product.getTitle()}(${product.getBrand()})- ${formatPrice(product.getPrice())}`);
       });
     }
-
     console.log("\n" + "=".repeat(50) + "\n");
   } catch (error) {
     throw error;
   }    
+}
+
   // demonstrate category filtering//
-  private async demonstrateCategoryFilter(): Promise<void>{
+ private async demonstrateCategoryFilter(): Promise<void>{
     console.log("Fetching products by category...\n");
 
     try{
       // first get all categories//
-      const categories = await this.ApiService.searchCategories();
+      const categories = await ApiService.getCategories();
       console.log(`Available categories: ${categories.slice(0,5).join(",")}...\n`);
 
       // fetch products from a specific category//
       const category = "smartphones";
       console.log(`Fetching products from "${category}" category:\n`);
 
-      const categoryProducts = await this.ApiService.getProductsByCategory(category);
+      const categoryProducts = await ApiService.getProductsByCategory(category);
 
       categoryProducts.slice(0,3).forEach(product=>{
-        console.log(`-${product.getTile()}-${formatPrice(product.getPrice())}`);
+        console.log(`-${product.getTitle()}-${formatPrice(product.getPrice())}`);
       });
       console.log("\n" + "=".repeat(50)+ "\n");
     } catch (error) {
       throw error; 
     }
-    }
+  }
+    
 
     // demonstrate tax calculations//
     private async demonstrateTaxCalculations(): Promise<void>{
@@ -125,17 +127,17 @@ class ECommerceApp {
 const demoProducts = this.products.slice(0,3);
 
 demoProducts.forEach(product => {
-  const priceAfterDiscount = product.priceAfterDiscount();
+  const priceAfterDiscount = product.getPriceWithDiscount();
   const taxAmount = calculateTax(priceAfterDiscount, product.getCategory());
   const breakdown = getPriceBreakdown(priceAfterDiscount, product.getCategory());
 
   console.log(`Product:${product.getTitle()}`);
   console.log(`Category:${product.getCategory()}`);
-  console.log(`Originial Price:${formatPrice(product.getPrice())}`);
+  console.log(`Original Price:${formatPrice(product.getPrice())}`);
   console.log(`Price after discount:${formatPrice(priceAfterDiscount)}`);
   console.log(`Tax Rate:${breakdown.taxRate}%`);
   console.log(`Tax Amount:${formatPrice(taxAmount)}`);
-  console.log.apply(`Final Price(with tax): ${formatPrice(breakdown.total)}`);
+ console.log(`Final Price(with tax): ${formatPrice(breakdown.total)}`);
   console.log("-".repeat(30));
 });
 
@@ -178,6 +180,6 @@ async function main(): Promise<void> {
 
 // run the application//
 main().catch(error => {
-  console.error("Fatal.error:", error);
+  console.error("Fatal error:", error);
   process.exit(1);
 });

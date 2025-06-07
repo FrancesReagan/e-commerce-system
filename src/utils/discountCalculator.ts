@@ -1,10 +1,10 @@
 
-//calculate the discount amount for a project//
+//calculate the discount amount for a product//
 //@parameter price - originial price of the product//
-//@parameter discountPercentage - discount percentageto apply//
-//@returns the dollar amojunt that the product is discounted by//
+//@parameter discountPercentage - discount percentage to apply//
+//@returns the dollar amount that the product is discounted by//
 
-export function calculateDiscount(price: number, discountPercentage: number): {
+export function calculateDiscount(price: number, discountPercentage: number): number {
   if (price < 0){
     throw new Error("Price cannot be negative");
   }
@@ -27,10 +27,10 @@ export function calculateFinalPrice(price: number, discountPercentage:number):nu
 
 // format price for display//
 // @parameter price - price to format//
-// @parametr currencySymbol - Currency symbol  (default:$)
+// @parameter currencySymbol - Currency symbol  (default:$)
 // @returns formatted price string//
 
-export function formatPrice(price: number, currencySymbol: string = "$": string {
+export function formatPrice(price: number, currencySymbol: string = "$"): string {
   return `${currencySymbol}${price.toFixed(2)}`;
 }
 
@@ -40,11 +40,11 @@ export function formatPrice(price: number, currencySymbol: string = "$": string 
 // @returns Savings percentage//
 
 export function calculateSavingsPercentage(originalPrice:number, finalPrice:number):number {
-  number {
-    if (originalPrice < 0){
+    if (originalPrice <= 0){
       return 0;
     }
 
   const savings = originalPrice - finalPrice;
   return(savings / originalPrice) * 100;
   }
+

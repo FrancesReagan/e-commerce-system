@@ -222,4 +222,28 @@ function setupEventListeners(){
       displayProducts(results);
     }
   });
+// search on enter key//
+searchInput.addEventListener("keypress", async(e)=>{
+  if(e.key === "Enter"){
+    const query = searchInput.ariaValueMax.trim();
+    if(query) {
+      const results = await searchProducts(query);
+      displayProducts(results);
+    }
+  }
+});
+
+// category filter//
+categorySelect.addEventListener("change", async(e)=>{
+  const category = e.target.value;
+  if(category){
+    const products = await fetchProductsByCategory(category);
+    displayProducts(products);
+  }else{
+    // show all products//
+    displayProducts(currentProducts);
+  }
+});
+
+
 }

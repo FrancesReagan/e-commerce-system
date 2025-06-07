@@ -1,7 +1,7 @@
 d
 // app.js -javascript for the e-commerce UI//
 
-const { displayPartsToString } = require("typescript");
+// const { displayPartsToString } = require("typescript");
 
 //this file uses async/await for all asynchronous operations//
 const API_BASE_URL = "https://dummyjson.com";
@@ -20,7 +20,7 @@ const errorDiv= document.getElementById("error-message");
 // initialize the application//
 async function init() {
   try {
-    showloading(true);
+    showLoading(true);
     // load categories and products simultaneously//
     const[categories, products] = await Promise.all([
       fetchCategories(),
@@ -131,7 +131,7 @@ async function fetchCategories() {
 }
 // display products in grid//
 function displayProducts(products){
-  if(!products || !products.length === 0) {
+  if(!products || products.length === 0) {
     productsGrid.innerHTML = '<p class="no-products">No products found.</p>';
     return;
   }
@@ -145,7 +145,7 @@ function createProductCard(product){
   const finalPrice = discountedPrice + taxAmount;
   return `
   <div class="product-card" data-product-id="${product.id}">
-    <img src="${product.thumbnail} alt="${product.title}" class="product-image">
+    <img src="${product.thumbnail}" alt="${product.title}" class="product-image">
     <div class="product-info">
     <h3 class="product-title">${product.title}</h3>
     <p class="product-brand">${product.brand}</p>
@@ -168,7 +168,7 @@ function createProductCard(product){
 }
 
 // view product details (async function)//
-async function viewProductDetails(productID){
+async function viewProductDetails(productId){
   try {
     showLoading(true);
     const product = await fetchProductById(productId);
@@ -216,7 +216,7 @@ categorySelect.innerHTML = options.join("");
 function setupEventListeners(){
   // search functionality//
   searchButton.addEventListener("click", async()=>{
-    const query = searchInput.ariaValueMax.trim();
+    const query = searchInput.trim();
     if(query){
       const results = await searchProducts(query);
       displayProducts(results);

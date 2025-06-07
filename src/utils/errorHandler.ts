@@ -1,7 +1,7 @@
 export class ApiError extends Error {
   constructor(
     message: string, 
-    statusCode: number) {
+    public statusCode: number) {
     super(message);
     this.name = "ApiError";
    }
@@ -48,8 +48,8 @@ export function logError(error: Error, severity: ErrorSeverity = ErrorSeverity.M
     stack:error.stack,
   };
 
-console.error(`[${severity}]${timestamp}-${error.name}:${error.message}`);
-if (error.stack && severity === ErrorSeverity.HIGH || severity === ErrorSeverity.CRITICAL) {
+console.error (`[${severity}]${timestamp}-${error.name}:${error.message}`);
+if (error.stack && (severity === ErrorSeverity.HIGH || severity === ErrorSeverity.CRITICAL)) {
   console.error("Stack trace:", error.stack);
 }
 }
@@ -67,11 +67,10 @@ export function handleError(error: unknown):void {
   } else if (error instanceof Error) {
     handleGenericError(error);
   } else {
-    handleGenericError(error);
-  }
+  handleUnknownError(error);
 }
-
-// handle APPI errors//
+}
+// handle API errors//
 // @param error - API error to handle//
 
 function handleApiError(error: ApiError):void {

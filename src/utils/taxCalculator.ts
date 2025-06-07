@@ -1,7 +1,6 @@
-import { get } from "http";
+
 import { PriceBreakdown } from "../types/types";
 
-Import {PriceBreakdown} from "src/models/types/types";
 // 4.75% default tax rate//
 const DEFAULT_TAX_RATE = 4.75;
 //3% tax rate for groceries//

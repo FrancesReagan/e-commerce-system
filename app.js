@@ -166,3 +166,23 @@ function createProductCard(product){
   </div>
     `;
 }
+
+// view product details (async function)//
+async function viewProductDetails(productID){
+  try {
+    showLoading(true);
+    const product = await fetchProductById(productId);
+    // display product details in a modal or detailed view//
+    alert(`
+      Product Details:
+      ====================
+      Title:${product.title}
+      Brand:${product.brand}
+      Description:${product.description}
+      Prics:$${product.price}
+      Discount:${product.discountPercentage}%
+      Rating:${product.rating}/5
+      Stock:${product.stock} units
+      `);
+  }
+}
